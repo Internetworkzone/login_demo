@@ -9,10 +9,13 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   Widget checkUser() {
-    return StreamBuilder(
+    return StreamBuilder<FirebaseUser>(
       stream: FirebaseAuth.instance.onAuthStateChanged,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          Provider.of<AuthService>(context).userName =
+              snapshot.data.displayName;
+          Provider.of<AuthService>(context).userEmail = snapshot.data.email;
           return HomePage();
         } else {
           return LoginPage();

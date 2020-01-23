@@ -19,8 +19,6 @@ class AuthService extends ChangeNotifier {
       idToken: googleAuth.idToken,
     );
     AuthResult user = await auth.signInWithCredential(credential);
-    userName = user.user.displayName;
-    userEmail = user.user.email;
     notifyListeners();
   }
 

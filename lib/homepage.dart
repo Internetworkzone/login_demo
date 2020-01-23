@@ -14,7 +14,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<AuthService>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
