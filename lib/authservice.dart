@@ -12,7 +12,8 @@ class AuthService extends ChangeNotifier {
   String userEmail;
 
   signInWithGoogle() async {
-    GoogleSignInAccount googleUser = await googleSignIn.signIn();
+    GoogleSignInAccount googleUser =
+        await googleSignIn.signIn().catchError((onError) {});
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;
     AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
@@ -20,6 +21,10 @@ class AuthService extends ChangeNotifier {
     );
     AuthResult user = await auth.signInWithCredential(credential);
     notifyListeners();
+  }
+
+  signUp({email, password}) async {
+    await auth.createUserWithEmailAndPassword(email: email, password: password);
   }
 
   googleSignOut() async {
